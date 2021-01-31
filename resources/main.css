@@ -71,12 +71,11 @@ body{
     border-radius: 40%;
 }
 
-#zero{
+.numerical-button[value="0"]{
     grid-column: 2;
 }
 
-
-.numerical-button, .operation-button{
+button{
     background: peachpuff;
     border-radius: 50%;
     text-align: center;
