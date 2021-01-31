@@ -37,49 +37,29 @@ function operate(operator,a,b){
     }
 }
 
-// ----------- calculator design -----------
-
-function drawCalculator(){
-    //let buttons = document.querySelector("#buttons-container");
-    let numbers = document.querySelector("#numbers-container");
-    let op= document.querySelector("#op-container");
-    // butoes numericos
-    for(let i=1; i<10; i++){
-        let numericalButton = document.createElement("button");
-        numericalButton.classList.add("numerical-button");
-        numericalButton.value = i;
-        numericalButton.textContent = i;
-        numbers.appendChild(numericalButton);
-    }
-
-    const operations= ["+", "-", "/", "*"];
-
-    for (i=0; i<4; i++){
-        let operation= document.createElement("button");
-        operation.classList.add("operation-button");
-      
-        operation.textContent = operations[i];
-        op.appendChild(operation);
-    }
-}
 
 //------------- button funcionality---------------
 
-function clicky(){
+
 
 let buttonNumbers = document.querySelectorAll(".numerical-button");
+let buttonOperations = document.querySelectorAll(".operation-button")
 
 buttonNumbers.forEach((button) => {
     button.addEventListener("click", ()=>{
-        //console.log(button.value);
         displayValue += button.textContent;
         display();
     });
 });
-}
 
-drawCalculator();
-clicky();
+buttonOperations.forEach((button) =>{
+    button.addEventListener("click", () => {
+        displayValue += button.textContent;
+        display();
+    });
+});
+
+
 
 function display(){
     let screenText = document.querySelector(".screen-text");

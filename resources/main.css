@@ -34,6 +34,8 @@ body{
  font-size: large;
 }
 
+/*-------buttons---*/
+
 #buttons-container{
     display: grid;
     grid-template-columns: 2fr 2fr;
@@ -42,7 +44,7 @@ body{
     margin: 0 10px 0 20px;
     grid-template-areas: 
     "numbers op"
-    ". op";   
+    "numbers op";   
 }
 
 #op-container{
@@ -61,12 +63,26 @@ body{
     grid-gap: 5px;
 }
 
+.operation-button[value="="]{
+    grid-column: span 3;
+    grid-row: 4;;
+    justify-self: center;
+    width: 150px;
+    border-radius: 40%;
+}
+
+#zero{
+    grid-column: 2;
+}
+
+
 .numerical-button, .operation-button{
     background: peachpuff;
     border-radius: 50%;
     text-align: center;
     line-height: 50px;
     width: 50px;
+    border: 1px solid silver;
 
 }
 
