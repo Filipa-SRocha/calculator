@@ -1,3 +1,5 @@
+let displayValue="";
+
 // ----- math functions --------
 
 function add(a,b){
@@ -43,8 +45,9 @@ function drawCalculator(){
     let op= document.querySelector("#op-container");
     // butoes numericos
     for(let i=1; i<10; i++){
-        let numericalButton = document.createElement("div");
+        let numericalButton = document.createElement("button");
         numericalButton.classList.add("numerical-button");
+        numericalButton.value = i;
         numericalButton.textContent = i;
         numbers.appendChild(numericalButton);
     }
@@ -52,17 +55,33 @@ function drawCalculator(){
     const operations= ["+", "-", "/", "*"];
 
     for (i=0; i<4; i++){
-        let operation= document.createElement("div");
+        let operation= document.createElement("button");
         operation.classList.add("operation-button");
+      
         operation.textContent = operations[i];
         op.appendChild(operation);
     }
-    
-
-
-
 }
 
+//------------- button funcionality---------------
 
+function clicky(){
+
+let buttonNumbers = document.querySelectorAll(".numerical-button");
+
+buttonNumbers.forEach((button) => {
+    button.addEventListener("click", ()=>{
+        //console.log(button.value);
+        displayValue += button.textContent;
+        display();
+    });
+});
+}
 
 drawCalculator();
+clicky();
+
+function display(){
+    let screenText = document.querySelector(".screen-text");
+    screenText.textContent=displayValue;
+}
