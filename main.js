@@ -3,24 +3,39 @@ let displayValue="";
 // ----- math functions --------
 
 function add(a,b){
-    return a+b;
+    return (isInt(a) && isInt(b)) ? a+b : ((a+b).toFixed(2));
+    //return a+b;
 }
 
 function multiply(a,b){
-    return a*b;
+    return (isInt(a) && isInt(b)) ? a*b : ((a*b).toFixed(2));
 }
 
 function subtract(a,b){
-    return a-b;
+    return (isInt(a) && isInt(b)) ? a-b : ((a-b).toFixed(2));
 }
 
 function divide(a,b){
-    return a/b;
+
+    return (isInt(a) && isInt(b)) ? a/b : ((a/b).toFixed(2));
 }
 
-function operate(operator,a,b){
-    a= parseInt(a);
-    b=parseInt(b);
+function isInt(n){
+    return n%1===0;
+}
+
+function getNumbers(strA, strB){
+    let a = strA.includes(".") ? parseFloat(strA) : parseInt(strA);
+    let b = strB.includes(".") ? parseFloat(strB) : parseInt(strB);
+ 
+    return [a,b];
+}
+
+function operate(operator,numA,numB){
+    let numbers = getNumbers(numA,numB);
+    a = numbers[0];
+    b = numbers[1];
+
     switch (operator){
         case "+":
             return add(a,b);
@@ -39,8 +54,9 @@ function operate(operator,a,b){
     }
 }
 
+let partialResult = 0;
 function sortOperations(calcString){
-    let partialResult = 0;
+ 
 
     if (calcString == ""){
         return 0;
@@ -61,10 +77,34 @@ function sortOperations(calcString){
     return partialResult;
 }
 
+//calculator other functions
+
+function display(displayContent){
+    let screenText = document.querySelector(".screen-text");
+    if (displayContent.length>30){
+        clear();
+        display("Limit Reached!");
+    }
+    else{
+        screenText.textContent=displayContent;
+    }
+   
+}
+
+function clear(){
+    displayValue ="";
+    display(displayValue);
+}
+
+
+
 //------------- button funcionality---------------
 
 let buttonNumbers = document.querySelectorAll(".numerical-button");
 let buttonOperations = document.querySelectorAll(".operation-button")
+let buttonClear = document.querySelector("#clear");
+
+buttonClear.addEventListener("click", clear);
 
 buttonNumbers.forEach((button) => {
     button.addEventListener("click", ()=>{
@@ -83,13 +123,8 @@ buttonOperations.forEach((button) =>{
         else{
             displayValue += " " + button.textContent + " ";
             display(displayValue);
-        }
-       
-        
+           
+        } 
     });
 });
 
-function display(displayContent){
-    let screenText = document.querySelector(".screen-text");
-    screenText.textContent=displayContent;
-}
